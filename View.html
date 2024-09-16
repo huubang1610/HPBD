@@ -39,7 +39,7 @@
             display: block;
         }
         img#logo {
-            width: 100px;
+            width: 130px;
             background-size: cover;
             border-radius: 200px;
             box-shadow: 0px 0px 40px rgba(63, 81, 181, 0.72);
@@ -87,14 +87,44 @@
 
 <body>
 <div class="cs">
-    <img src="https://scontent.fhph1-3.fna.fbcdn.net/v/t39.30808-6/450939359_1837804010046201_8570197577621315628_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGKQ7VG_yW_SbQ8Wjj1WdkAYJ-_AA4wRb5gn78ADjBFvhj9ph_z3cx_HWv6tHCLI7QCYQBq0T0TE3Iw9QEG5Ywx&_nc_ohc=AuEt80CUA1oQ7kNvgFVke5f&_nc_ht=scontent.fhph1-3.fna&_nc_gid=Axfkimb9yj7yCg1NTTyPz9C&oh=00_AYAziTBfJ8pwQPDmm2QvH5NzGQqJbrXPLQHHsQxyEZjgUA&oe=66E4E4CD" id="logo">
+    <img src="file/n.jpg" id="logo">
 </div>
 <canvas class="canvas" width="1820" height="905"></canvas>
 <p class="text" style="color: #e55688;">
     Phan Minh Ngọc
     <br/>
     <span id="span_dt_dt"></span>
+    <!-- <audio id="myAudio" style="display: none;"></audio>
+        <source src="file/nhac.mp3" type="audio/mpeg">
+    </audio> -->
 </p>
+
+<script>
+    // Tạo AudioContext
+    var audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playMusic() {
+        var audio = new Audio('file/nhac.mp3');
+
+        // Phát nhạc khi AudioContext được kích hoạt lại sau hành động người dùng
+        audioContext.resume().then(() => {
+            audio.play().then(() => {
+                console.log('Phát âm thanh thành công');
+            }).catch(error => {
+                console.error('Lỗi khi phát âm thanh:', error.message);
+            });
+        }).catch(error => {
+            console.error('Lỗi khi chạy AudioContext:', error.message);
+        });
+
+        // Xóa sự kiện sau khi người dùng tương tác và nhạc phát
+        document.removeEventListener('click', playMusic);
+    }
+
+    // Lắng nghe sự kiện click để bắt đầu phát nhạc
+    document.addEventListener('click', playMusic);
+</script>
+
 <script language="javascript">
     function show_date_time() {
         window.setTimeout("show_date_time()", 1000);
@@ -107,7 +137,7 @@
         init: function () {
             S.Drawing.init('.canvas');
             document.body.classList.add('body--ready');
-            S.UI.simulate(" ᕼᗩᑭᑭY ᗷIᖇTᕼ ᗞᗩY|Bạn Ngọc ơi|Thổi Nến Nào|#countdown 3|🎂|Phùuuuu|💕|#time");
+            S.UI.simulate("Bạn|Ngọc|ơi|Thổi|Nến|Nào|#countdown 3|🎂|Phùu|Chúc|Mừng|Sinh|Nhật|💕|#time");
             // S.UI.simulate("THổi|Nến|Nào|🎂|Phùuuuu🕯️|#circle 12 |#time");
             S.Drawing.loop(function () {
                 S.Shape.render();
@@ -575,8 +605,8 @@
     }());
     S.init();
 </script>
-<audio autoplay="autoplay" loop="loop">
-    <source src="http://m10.music.126.net/20180509183512/5ae461e9a42675d782840bf139b05c60/ymusic/e492/ea7a/6a27/8799d19e52d9bbe3ae15febb03d7efdb.mp3" type="audio/mpeg">
-</audio>
+<!-- <audio autoplay="autoplay" loop="loop">
+    <source src="file/nhac.mp3" type="audio/mpeg">
+</audio> -->
 </body>
 </html>
