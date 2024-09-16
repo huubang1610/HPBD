@@ -137,14 +137,13 @@
             console.error('Lỗi khi chạy AudioContext:', error.message);
         });
 
-        // Xóa sự kiện sau khi người dùng tương tác và nhạc phát
-        document.removeEventListener('click', playMusic);
     }
 
     document.body.addEventListener('click', function(e) {
             // Tạo một phần tử span mới để chứa chữ "A"
             const letter = document.createElement('span');
             letter.classList.add('letter');
+            playMusic();
             letter.textContent = '🎂🎂🎂'; // Chữ sẽ hiện ra là "A"
             document.body.appendChild(letter);
 
