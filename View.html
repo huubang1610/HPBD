@@ -81,25 +81,45 @@
             width: 100%;
             font-weight: bold;
         }
+        .letter {
+            position: absolute;
+            font-size: 50px;
+            color: rgba(255, 255, 255, 0.8);
+            animation: appear 1s ease-out forwards;
+            transform: scale(0);
+        }
+        @keyframes appear {
+            to {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+        @media only screen and (max-width: 430px) {
+            .canvas {
+                width: 100%;
+                height: calc(100vh - 20px); /* Trừ đi một khoảng nhỏ cho thanh trạng thái */
+            }
+        }
     </style>
 
 </head>
 
 <body>
 <div class="cs">
-    <img src="file/n.jpg" id="logo">
+    <!-- <img src="file/n.jpg" id="logo"> -->
 </div>
 <canvas class="canvas" width="1820" height="905"></canvas>
 <p class="text" style="color: #e55688;">
     Phan Minh Ngọc
     <br/>
     <span id="span_dt_dt"></span>
-    <!-- <audio id="myAudio" style="display: none;"></audio>
+    <audio id="myAudio" style="display: none;"></audio>
         <source src="file/nhac.mp3" type="audio/mpeg">
-    </audio> -->
+    </audio>
 </p>
 
 <script>
+    
     // Tạo AudioContext
     var audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -121,14 +141,29 @@
         document.removeEventListener('click', playMusic);
     }
 
-    // Lắng nghe sự kiện click để bắt đầu phát nhạc
-    document.addEventListener('click', playMusic);
+    document.body.addEventListener('click', function(e) {
+            // Tạo một phần tử span mới để chứa chữ "A"
+            const letter = document.createElement('span');
+            letter.classList.add('letter');
+            letter.textContent = '🎂🎂🎂'; // Chữ sẽ hiện ra là "A"
+            document.body.appendChild(letter);
+
+            // Thiết lập vị trí của chữ "A" theo vị trí nhấp chuột
+            letter.style.left = e.pageX - 25 + 'px';
+            letter.style.top = e.pageY - 25 + 'px';
+
+            // Xóa chữ sau khi hiệu ứng kết thúc
+            letter.addEventListener('animationend', function() {
+                letter.remove();
+            });
+        });
 </script>
 
 <script language="javascript">
     function show_date_time() {
         window.setTimeout("show_date_time()", 1000);
         span_dt_dt.innerHTML = "17/09/2000";
+        span_dt_dt.innerHTML = "😄Chạm vào màn hình😄";
     }
     show_date_time();
 </script>
